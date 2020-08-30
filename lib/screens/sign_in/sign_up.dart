@@ -125,22 +125,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 onChanged: (value) => password = value,
               ),
               SizedBox(height: size.height * 0.05),
-              SignButton(
-                  size: size,
-                  text: 'REGISTRAR',
-                  onPressed: () async {
-                    Donor donor = new Donor(
-                      name: name,
-                      lastName: lastName,
-                      email: email,
-                      password: password,
-                    );
-                    progressDialog.show();
-                    final response =
-                        await registerDonorProvider.postRegister(donor);
-                    progressDialog.hide();
-                    response != null ? Navigator.pop(context) : print('Error');
-                  }),
+              Builder(
+                builder: (context) => SignButton(
+                    size: size,
+                    text: 'REGISTRAR',
+                    onPressed: () async {
+                      Donor donor = new Donor(
+                        name: name,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                      );
+                      progressDialog.show();
+                      final response =
+                          await registerDonorProvider.postRegister(donor);
+                      progressDialog.hide();
+                      response != null
+                          ? Navigator.pop(context)
+                          : Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text('Ha ocurrido un error')));
+                    }),
+              ),
               SizedBox(height: size.height * 0.05),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

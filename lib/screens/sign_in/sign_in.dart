@@ -106,23 +106,25 @@ class _SignInScreenState extends State<SignInScreen> {
                       SizedBox(height: size.height * 0.05),
                       SignText(text: 'Recuperar contraseña', size: 18.0),
                       SizedBox(height: size.height * 0.05),
-                      SignButton(
-                        size: size,
-                        text: 'Iniciar Sesión',
-                        onPressed: () async {
-                          progressDialog.show();
-                          print('hola');
-                          final donor = await loginProvider.postLogin(
-                              userValue, passwordValue);
-                          progressDialog.hide();
-                          donor != null
-                              ? Navigator.popAndPushNamed(
-                                  context,
-                                  HomeScreen.routeName,
-                                  arguments: donor,
-                                )
-                              : print('error');
-                        },
+                      Builder(
+                        builder: (context) => SignButton(
+                          size: size,
+                          text: 'Iniciar Sesión',
+                          onPressed: () async {
+                            progressDialog.show();
+                            final donor = await loginProvider.postLogin(
+                                userValue, passwordValue);
+                            progressDialog.hide();
+                            donor != null
+                                ? Navigator.popAndPushNamed(
+                                    context,
+                                    HomeScreen.routeName,
+                                    arguments: donor,
+                                  )
+                                : Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text('Ha ocurrido un error')));
+                          },
+                        ),
                       ),
                       SizedBox(height: size.height * 0.05),
                       Container(

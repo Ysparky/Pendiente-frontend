@@ -53,4 +53,39 @@ class CampaignListProvider {
     print(createdDonor.name);
     return createdDonor;
   }
+
+  Future<bool> postMakeDonation() async {
+    print('MAKING REQUEST');
+    // final response = await http.post(
+    //     'https://pendiente-backend.herokuapp.com/api/donations/',
+    //     body: <String, dynamic>{
+    //       "email": "leo@urp.com",
+    //       "card_number": "4111111111111111",
+    //       "cvv": "123",
+    //       "expiration_year": "2025",
+    //       "expiration_month": "09",
+    //       "first_name": "Leo",
+    //       "last_name": "Espinoza",
+    //       "description":
+    //           "Donación de ${campaignModel.baskets[0].price} soles a ${campaignModel.description} ",
+    //       "donorId": 2,
+    //       "basketId": campaignModel.baskets[0].id,
+    //     });
+
+    final response = await http.post(
+        'https://pendiente-backend.herokuapp.com/api/donations/',
+        body: <String, dynamic>{
+          "email": "leo@urp.com",
+          "card_number": "4111111111111111",
+          "cvv": "123",
+          "expiration_year": "2025",
+          "expiration_month": "09",
+          "first_name": "Leo",
+          "last_name": "Espinoza",
+          "description": "Metro: bolsa de donación del banco de alimentos",
+          "donorId": "2",
+          "basketId": "14",
+        });
+    return response.statusCode == 200 ? true : false;
+  }
 }

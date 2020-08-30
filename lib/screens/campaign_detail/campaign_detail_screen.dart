@@ -68,7 +68,8 @@ class CampaignDetailScreen extends StatelessWidget {
           const SizedBox(height: 8.0),
           Expanded(
             flex: 2,
-            child: FooterCampaignDetail(size: size),
+            child:
+                FooterCampaignDetail(size: size, campaignModel: campaignModel),
           )
         ],
       ),

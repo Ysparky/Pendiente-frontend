@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
+import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
 import 'package:pendiente_frontend_flutter/screens/card_info/register_card_screen.dart';
 import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class FooterCampaignDetail extends StatelessWidget {
-  const FooterCampaignDetail({
+  FooterCampaignDetail({
     Key key,
     @required this.size,
+    this.campaignModel,
   }) : super(key: key);
 
   final Size size;
-
+  final Campaign campaignModel;
+  final donationProvider = new CampaignListProvider();
   @override
   Widget build(BuildContext context) {
+    ProgressDialog progressDialog =
+        ProgressDialog(context, isDismissible: false);
+    progressDialog.style(
+      message: 'Realizando transacción',
+      progressWidget: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircularProgressIndicator(),
+      ),
+    );
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
@@ -39,7 +53,19 @@ class FooterCampaignDetail extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.2),
-            child: SignButton(size: size, text: 'DONAR', onPressed: () {}),
+            child: SignButton(
+                size: size,
+                text: 'DONAR',
+                onPressed: () async {
+                  progressDialog.show();
+                  final response = await donationProvider.postMakeDonation();
+                  progressDialog.hide();
+                  response
+                      ? Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('Transacción realizada correctamente')))
+                      : Scaffold.of(context).showSnackBar(
+                          SnackBar(content: Text('Ha ocurrido un error')));
+                }),
           ),
         ],
       ),
