@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
 import 'package:pendiente_frontend_flutter/screens/home/home_screen.dart';
-
+import 'package:progress_dialog/progress_dialog.dart';
 // import 'package:pendiente_frontend_flutter/screens/sign_in/components/custom_input_field.dart';
 import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
 import 'package:pendiente_frontend_flutter/screens/sign_in/components/sign_text.dart';
@@ -16,6 +16,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  ProgressDialog progressDialog;
   final loginProvider = new CampaignListProvider();
   final underlineInputBorder = UnderlineInputBorder(
     borderSide: BorderSide(
@@ -37,6 +38,14 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    progressDialog = ProgressDialog(context, isDismissible: false);
+    progressDialog.style(
+      message: 'Cargando',
+      progressWidget: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircularProgressIndicator(),
+      ),
+    );
     final size = MediaQuery.of(context).size;
     var logoImage = Positioned(
       top: 0,
@@ -101,8 +110,11 @@ class _SignInScreenState extends State<SignInScreen> {
                         size: size,
                         text: 'Iniciar Sesión',
                         onPressed: () async {
+                          progressDialog.show();
+                          print('hola');
                           final donor = await loginProvider.postLogin(
                               userValue, passwordValue);
+                          progressDialog.hide();
                           donor != null
                               ? Navigator.popAndPushNamed(
                                   context,

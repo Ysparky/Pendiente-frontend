@@ -20,8 +20,11 @@ class CampaignDetailScreen extends StatelessWidget {
           Container(
             height: size.height * 0.35,
             width: double.infinity,
-            child: Image.network(
-              campaignModel.image,
+            child: FadeInImage(
+              placeholder: AssetImage('assets/images/loading.gif'),
+              image: NetworkImage(
+                campaignModel.image,
+              ),
               fit: BoxFit.cover,
             ),
           ),

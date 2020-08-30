@@ -4,6 +4,7 @@ import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart'
 // import 'package:pendiente_frontend_flutter/screens/sign_in/components/custom_input_field.dart';
 import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
 import 'package:pendiente_frontend_flutter/screens/sign_in/components/sign_text.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String routeName = '/sign_up';
@@ -13,6 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  ProgressDialog progressDialog;
   final registerDonorProvider = new CampaignListProvider();
   String name, lastName, email, password;
   final underlineInputBorder = UnderlineInputBorder(
@@ -31,6 +33,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    progressDialog = ProgressDialog(context, isDismissible: false);
+    progressDialog.style(
+      message: 'Registrando',
+      progressWidget: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CircularProgressIndicator(),
+      ),
+    );
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -125,9 +135,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       email: email,
                       password: password,
                     );
-
+                    progressDialog.show();
                     final response =
                         await registerDonorProvider.postRegister(donor);
+                    progressDialog.hide();
                     response != null ? Navigator.pop(context) : print('Error');
                   }),
               SizedBox(height: size.height * 0.05),

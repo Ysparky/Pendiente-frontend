@@ -15,8 +15,11 @@ class ImageCard extends StatelessWidget {
       flex: 6,
       child: Container(
         width: double.infinity,
-        child: Image.network(
-          campaignModel.image,
+        child: FadeInImage(
+          placeholder: AssetImage('assets/images/loading.gif'),
+          image: NetworkImage(
+            campaignModel.image,
+          ),
           fit: BoxFit.cover,
         ),
       ),
