@@ -15,6 +15,7 @@ class Donor {
   String name;
   String lastName;
   String email;
+  String password;
   String pathImage;
   String cardHolder;
   String cardNumber;
@@ -31,6 +32,7 @@ class Donor {
     this.name,
     this.lastName,
     this.email,
+    this.password,
     this.pathImage,
     this.cardHolder,
     this.cardNumber,

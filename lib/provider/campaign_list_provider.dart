@@ -37,4 +37,20 @@ class CampaignListProvider {
     Donor donor = new Donor.loginInfo(decodedData['data']);
     return donor;
   }
+
+  Future<Donor> postRegister(Donor donor) async {
+    final response = await http
+        .post('https://pendiente-backend.herokuapp.com/api/users', body: {
+      "name": donor.name,
+      "lastName": donor.lastName,
+      "email": donor.email,
+      "password": donor.password,
+    });
+    if (response.statusCode != 200) return null;
+    final decodedData = json.decode(response.body);
+    Donor createdDonor = new Donor.loginInfo(decodedData['data']);
+    print(createdDonor.id);
+    print(createdDonor.name);
+    return createdDonor;
+  }
 }
