@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
 import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
-import 'package:pendiente_frontend_flutter/screens/card_info/register_card_screen.dart';
 import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
@@ -38,14 +37,12 @@ class FooterCampaignDetail extends StatelessWidget {
             children: [
               Icon(Icons.credit_card, size: 40.0),
               const SizedBox(width: 5.0),
-              Text('1234', style: TextStyle(fontSize: 16.0)),
+              Text('1111', style: TextStyle(fontSize: 16.0)),
               Spacer(),
               FlatButton(
                 textColor: Colors.blue,
                 child: Text('Cambiar', style: TextStyle(fontSize: 16.0)),
-                onPressed: () {
-                  Navigator.pushNamed(context, RegisterCardScreeen.routeName);
-                },
+                onPressed: null,
               ),
             ],
           ),
