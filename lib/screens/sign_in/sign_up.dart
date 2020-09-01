@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/model/donor_model.dart';
 import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
-// import 'package:pendiente_frontend_flutter/screens/sign_in/components/custom_input_field.dart';
 import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
 import 'package:pendiente_frontend_flutter/screens/sign_in/components/sign_text.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -136,10 +135,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         email: email,
                         password: password,
                       );
-                      progressDialog.show();
+                      await progressDialog.show();
                       final response =
                           await registerDonorProvider.postRegister(donor);
-                      progressDialog.hide();
+                      await progressDialog.hide();
                       response != null
                           ? Navigator.pop(context)
                           : Scaffold.of(context).showSnackBar(

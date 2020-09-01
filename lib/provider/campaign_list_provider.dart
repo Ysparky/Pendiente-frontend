@@ -54,24 +54,9 @@ class CampaignListProvider {
     return createdDonor;
   }
 
-  Future<bool> postMakeDonation() async {
-    print('MAKING REQUEST');
-    // final response = await http.post(
-    //     'https://pendiente-backend.herokuapp.com/api/donations/',
-    //     body: <String, dynamic>{
-    //       "email": "leo@urp.com",
-    //       "card_number": "4111111111111111",
-    //       "cvv": "123",
-    //       "expiration_year": "2025",
-    //       "expiration_month": "09",
-    //       "first_name": "Leo",
-    //       "last_name": "Espinoza",
-    //       "description":
-    //           "Donación de ${campaignModel.baskets[0].price} soles a ${campaignModel.description} ",
-    //       "donorId": 2,
-    //       "basketId": campaignModel.baskets[0].id,
-    //     });
-
+  Future<bool> postMakeDonation(
+      Campaign campaign, int basketId, int donorId) async {
+    print("Donación a ${campaign.name} - (${campaign.ongName})");
     final response = await http.post(
         'https://pendiente-backend.herokuapp.com/api/donations/',
         body: <String, dynamic>{
@@ -82,9 +67,9 @@ class CampaignListProvider {
           "expiration_month": "09",
           "first_name": "Leo",
           "last_name": "Espinoza",
-          "description": "Metro: bolsa de donación del banco de alimentos",
-          "donorId": "2",
-          "basketId": "14",
+          "description": "Donación a ${campaign.name} - (${campaign.ongName})",
+          "donorId": donorId.toString(),
+          "basketId": basketId.toString(),
         });
     return response.statusCode == 200 ? true : false;
   }

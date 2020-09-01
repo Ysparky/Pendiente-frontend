@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/model/donor_model.dart';
 import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
 import 'package:pendiente_frontend_flutter/screens/campaigns/campaign_card.dart';
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 class CampaignsScreen extends StatelessWidget {
   final campaignListProvider = new CampaignListProvider();
+  final prefs = new SharedPref();
   @override
   Widget build(BuildContext context) {
     final Donor donorModel = ModalRoute.of(context).settings.arguments;
+    prefs.donorId = donorModel.id;
     final Size size = MediaQuery.of(context).size;
     return FutureBuilder(
       future: campaignListProvider.makeRequest(donorModel.id),

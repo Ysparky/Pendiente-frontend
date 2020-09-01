@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/model/baskets_model.dart';
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
 import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 class HorizontalPricesList extends StatefulWidget {
   HorizontalPricesList({
@@ -19,6 +20,7 @@ class HorizontalPricesList extends StatefulWidget {
 
 class _HorizontalPricesListState extends State<HorizontalPricesList> {
   final detailCampaignProvider = new CampaignListProvider();
+  final prefs = new SharedPref();
   Basket _current = Basket();
 
   void _onPriceSelect(Basket basket) {
@@ -56,6 +58,7 @@ class _HorizontalPricesListState extends State<HorizontalPricesList> {
         selected: _current.id == campaign.baskets[index].id,
         onTap: () {
           _onPriceSelect(campaign.baskets[index]);
+          prefs.basketId = _current.id;
         },
       ),
     );

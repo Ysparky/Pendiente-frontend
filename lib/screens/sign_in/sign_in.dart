@@ -111,10 +111,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           size: size,
                           text: 'Iniciar Sesión',
                           onPressed: () async {
-                            progressDialog.show();
+                            await progressDialog.show();
                             final donor = await loginProvider.postLogin(
                                 userValue, passwordValue);
-                            progressDialog.hide();
+                            await progressDialog.hide();
                             donor != null
                                 ? Navigator.popAndPushNamed(
                                     context,

@@ -5,8 +5,12 @@ import 'package:pendiente_frontend_flutter/screens/home/home_screen.dart';
 import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in.dart';
 import 'package:pendiente_frontend_flutter/screens/sign_in/sign_up.dart';
 import 'package:pendiente_frontend_flutter/screens/splash_screen.dart';
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = new SharedPref();
+  await prefs.initPrefs();
   runApp(MyApp());
 }
 
