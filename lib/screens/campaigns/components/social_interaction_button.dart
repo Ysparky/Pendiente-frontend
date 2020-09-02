@@ -16,7 +16,7 @@ class SocialInteractionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Expanded(
-      child: GestureDetector(
+      child: InkWell(
         onTap: onTap,
         child: Container(
           height: size.height * 0.035,

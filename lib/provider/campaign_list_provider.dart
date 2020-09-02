@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
+import 'package:pendiente_frontend_flutter/model/donation_model.dart';
 import 'package:pendiente_frontend_flutter/model/donor_model.dart';
 
 class CampaignListProvider {
@@ -71,6 +72,28 @@ class CampaignListProvider {
           "donorId": donorId.toString(),
           "basketId": basketId.toString(),
         });
+    return response.statusCode == 200 ? true : false;
+  }
+
+  Future<List<Donation>> getDonationsById(int donorId) async {
+    final response = await http.get(
+        'https://pendiente-backend.herokuapp.com/api/donations/donor/$donorId');
+
+    final decodedData = json.decode(response.body);
+    Donations donations = new Donations.fromJsonList(decodedData['data']);
+    donations.donationsList.sort((a, b) =>
+        a.currentDonationStatusId.compareTo(b.currentDonationStatusId));
+    return donations.donationsList;
+  }
+
+  Future<bool> putLike(int campaignId, int donorId) async {
+    final response = await http.put(
+        'https://pendiente-backend.herokuapp.com/api/likes/',
+        body: <String, String>{
+          "donorId": "$donorId",
+          "campaignId": "$campaignId",
+        });
+
     return response.statusCode == 200 ? true : false;
   }
 }

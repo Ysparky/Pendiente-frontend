@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
 import 'package:pendiente_frontend_flutter/screens/home/home_screen.dart';
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 // import 'package:pendiente_frontend_flutter/screens/sign_in/components/custom_input_field.dart';
 import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
@@ -38,6 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final prefs = new SharedPref();
     progressDialog = ProgressDialog(context, isDismissible: false);
     progressDialog.style(
       message: 'Cargando',
@@ -115,14 +117,17 @@ class _SignInScreenState extends State<SignInScreen> {
                             final donor = await loginProvider.postLogin(
                                 userValue, passwordValue);
                             await progressDialog.hide();
-                            donor != null
-                                ? Navigator.popAndPushNamed(
-                                    context,
-                                    HomeScreen.routeName,
-                                    arguments: donor,
-                                  )
-                                : Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text('Ha ocurrido un error')));
+                            if (donor != null) {
+                              prefs.isLoggedIn = true;
+                              prefs.donorId = donor.id;
+                              Navigator.popAndPushNamed(
+                                context,
+                                HomeScreen.routeName,
+                              );
+                            } else {
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text('Ha ocurrido un error')));
+                            }
                           },
                         ),
                       ),

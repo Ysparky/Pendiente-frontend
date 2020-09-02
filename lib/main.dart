@@ -15,7 +15,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  final prefs = new SharedPref();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xffFFF951),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: SplashScreen.routeName,
+      initialRoute:
+          prefs.isLoggedIn ? HomeScreen.routeName : SignInScreen.routeName,
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
         SignInScreen.routeName: (context) => SignInScreen(),

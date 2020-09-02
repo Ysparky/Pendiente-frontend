@@ -62,11 +62,14 @@ class FooterCampaignDetail extends StatelessWidget {
                   final response = await donationProvider.postMakeDonation(
                       campaignModel, basketId, donorId);
                   await progressDialog.hide();
-                  response
-                      ? Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text('Transacción realizada correctamente')))
-                      : Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text('Ha ocurrido un error')));
+                  if (response) {
+                    prefs.remove('basketId');
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text('Transacción realizada correctamente')));
+                  } else {
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Ha ocurrido un error')));
+                  }
                 }),
           ),
         ],

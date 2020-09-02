@@ -30,4 +30,21 @@ class SharedPref {
   set basketId(int basketId) {
     _prefs.setInt('basketId', basketId);
   }
+
+  get isLoggedIn {
+    return _prefs.getBool('isLoggedIn') ?? false;
+  }
+
+  set isLoggedIn(bool isLogged) {
+    _prefs.setBool('isLoggedIn', isLogged);
+  }
+
+  void removeAll() {
+    _prefs.remove('basketId');
+    _prefs.remove('donorId');
+  }
+
+  void remove(String key) {
+    _prefs.remove(key);
+  }
 }

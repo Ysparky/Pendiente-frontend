@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/screens/campaigns/campaigns_screen.dart';
+import 'package:pendiente_frontend_flutter/screens/favorite_campaigns/donations_page.dart';
+import 'package:pendiente_frontend_flutter/screens/profile/profile_screen.dart';
+import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in.dart';
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/home';
@@ -9,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final prefs = new SharedPref();
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,35 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      drawer: Container(),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: FlutterLogo(),
+            ),
+            ListTile(
+              leading: Icon(Icons.dashboard),
+              title: Text('Dashboard'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 0;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Salir'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, SignInScreen.routeName);
+                prefs.isLoggedIn = false;
+                prefs.removeAll();
+              },
+            )
+          ],
+        ),
+      ),
       body: _callPage(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 10.0,
@@ -74,11 +107,11 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return Center(child: Text('Seatch'));
       case 2:
-        return Center(child: Text('Donations'));
+        return DonationsScreen();
       case 3:
         return Center(child: Text('Favorites'));
       case 4:
-        return Center(child: Text('Profile'));
+        return ProfileScreen();
       default:
         return CampaignsScreen();
     }

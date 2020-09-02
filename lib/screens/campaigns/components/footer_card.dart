@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
+import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
 import 'package:pendiente_frontend_flutter/screens/campaigns/components/social_interaction_button.dart';
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
-class FooterCard extends StatelessWidget {
+class FooterCard extends StatefulWidget {
   const FooterCard({
     Key key,
     @required this.campaignModel,
   }) : super(key: key);
 
   final Campaign campaignModel;
+
+  @override
+  _FooterCardState createState() => _FooterCardState();
+}
+
+class _FooterCardState extends State<FooterCard> {
+  final prefs = new SharedPref();
+  final campaignProvider = new CampaignListProvider();
+  bool isLiked;
+  int likesCount;
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.campaignModel.likeStatus;
+    likesCount = widget.campaignModel.likesQuantity;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +48,7 @@ class FooterCard extends StatelessWidget {
                   Expanded(
                     flex: 5,
                     child: Text(
-                      campaignModel.description,
+                      widget.campaignModel.description,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(height: 1.2, fontSize: 15.0),
@@ -39,7 +57,7 @@ class FooterCard extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: IconButton(
-                      icon: campaignModel.favoriteStatus
+                      icon: widget.campaignModel.favoriteStatus
                           ? Icon(Icons.star, color: Colors.yellow)
                           : Icon(Icons.star_border),
                       onPressed: () {},
@@ -57,21 +75,21 @@ class FooterCard extends StatelessWidget {
                   Icon(Icons.account_circle, color: Colors.blue),
                   const SizedBox(width: 5.0),
                   Text(
-                    campaignModel.likesQuantity.toString(),
+                    likesCount.toString(),
                     style: TextStyle(fontSize: 12.0),
                   ),
                   Spacer(),
                   Text(
-                    campaignModel.commentsQuantity != 1
-                        ? '${campaignModel.commentsQuantity} comentarios'
-                        : '${campaignModel.commentsQuantity} comentario',
+                    widget.campaignModel.commentsQuantity != 1
+                        ? '${widget.campaignModel.commentsQuantity} comentarios'
+                        : '${widget.campaignModel.commentsQuantity} comentario',
                     style: TextStyle(fontSize: 12.0),
                   ),
                   const SizedBox(width: 5.0),
                   Text(
-                    campaignModel.donations != 1
-                        ? '${campaignModel.donations} donaciones'
-                        : '${campaignModel.donations} donación',
+                    widget.campaignModel.donations != 1
+                        ? '${widget.campaignModel.donations} donaciones'
+                        : '${widget.campaignModel.donations} donación',
                     style: TextStyle(fontSize: 12.0),
                   ),
                 ],
@@ -83,12 +101,36 @@ class FooterCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SocialInteractionButton(
-                    interactionIcon: Icons.thumb_up,
-                    interactionText: 'Me gusta',
-                    interactionColor:
-                        campaignModel.likeStatus ? Colors.blue : Colors.black,
-                    onTap: () {},
+                  Expanded(
+                    child: InkWell(
+                      onTap: () async {
+                        setState(() {
+                          isLiked = !isLiked;
+                          likesCount =
+                              isLiked ? likesCount + 1 : likesCount - 1;
+                        });
+                        await campaignProvider.putLike(
+                            widget.campaignModel.id, prefs.donorId);
+                      },
+                      child: Container(
+                        height: size.height * 0.035,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.thumb_up,
+                                size: 18.0,
+                                color: isLiked ? Colors.blue : Colors.black),
+                            SizedBox(width: size.width * 0.006),
+                            Text(
+                              'Me gusta',
+                              style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: isLiked ? Colors.blue : Colors.black),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                   SocialInteractionButton(
                     interactionIcon: Icons.mode_comment,
