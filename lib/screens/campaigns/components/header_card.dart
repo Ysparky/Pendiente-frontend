@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
 
 class HeaderCard extends StatelessWidget {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
-import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
+import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
+
 import 'package:pendiente_frontend_flutter/screens/campaigns/components/social_interaction_button.dart';
-import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 class FooterCard extends StatefulWidget {
   const FooterCard({
@@ -17,8 +18,7 @@ class FooterCard extends StatefulWidget {
 }
 
 class _FooterCardState extends State<FooterCard> {
-  final prefs = new SharedPref();
-  final campaignProvider = new CampaignListProvider();
+  final campaignProvider = new ApiProvider();
   bool isLiked;
   int likesCount;
   @override
@@ -109,8 +109,7 @@ class _FooterCardState extends State<FooterCard> {
                           likesCount =
                               isLiked ? likesCount + 1 : likesCount - 1;
                         });
-                        await campaignProvider.putLike(
-                            widget.campaignModel.id, prefs.donorId);
+                        await campaignProvider.putLike(widget.campaignModel.id);
                       },
                       child: Container(
                         height: size.height * 0.035,

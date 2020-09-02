@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/components/custom_input_field.dart';
+import 'package:pendiente_frontend_flutter/screens/widgets/sign_button.dart';
+import 'package:pendiente_frontend_flutter/screens/widgets/custom_input_field.dart';
 
 class RegisterCardScreeen extends StatelessWidget {
   static String routeName = '/register_card';

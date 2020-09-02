@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
-import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
-import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
-import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+
+import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
+import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
+
+import 'package:pendiente_frontend_flutter/screens/widgets/sign_button.dart';
 
 class FooterCampaignDetail extends StatelessWidget {
   final prefs = new SharedPref();
@@ -15,7 +17,7 @@ class FooterCampaignDetail extends StatelessWidget {
 
   final Size size;
   final Campaign campaignModel;
-  final donationProvider = new CampaignListProvider();
+  final donationProvider = new ApiProvider();
   @override
   Widget build(BuildContext context) {
     ProgressDialog progressDialog =
@@ -56,11 +58,9 @@ class FooterCampaignDetail extends StatelessWidget {
                 size: size,
                 text: 'DONAR',
                 onPressed: () async {
-                  int basketId = prefs.basketId;
-                  int donorId = prefs.donorId;
                   await progressDialog.show();
-                  final response = await donationProvider.postMakeDonation(
-                      campaignModel, basketId, donorId);
+                  final response =
+                      await donationProvider.postMakeDonation(campaignModel);
                   await progressDialog.hide();
                   if (response) {
                     prefs.remove('basketId');

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
-import 'package:pendiente_frontend_flutter/screens/home/home_screen.dart';
-import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-// import 'package:pendiente_frontend_flutter/screens/sign_in/components/custom_input_field.dart';
-import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/components/sign_text.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/components/triangle_painter.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/sign_up.dart';
+
+import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
+
+import 'package:pendiente_frontend_flutter/screens/screens.dart';
+import 'package:pendiente_frontend_flutter/screens/widgets/widgets.dart';
 
 class SignInScreen extends StatefulWidget {
   static String routeName = '/sign_in';
@@ -18,7 +16,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   ProgressDialog progressDialog;
-  final loginProvider = new CampaignListProvider();
+  final loginProvider = new ApiProvider();
   final underlineInputBorder = UnderlineInputBorder(
     borderSide: BorderSide(
       color: Color(0xffEFC426),

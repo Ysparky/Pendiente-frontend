@@ -54,4 +54,13 @@ class Donation {
         currentDonationStatusName: json['currentDonationStatusName'],
         donationCreatedDate: json['donationCreatedDate'],
       );
+
+  factory Donation.fromProfileMap(Map<String, dynamic> json) => Donation(
+        campaignName: json['campaignName'],
+        // campaignDescription: json['campaignDescription'],
+        campaignImage: json['campaignImage'],
+        ongName: json['ongName'],
+        ongImage: json['ongImage'],
+        donationCreatedDate: json['createdAt'],
+      );
 }

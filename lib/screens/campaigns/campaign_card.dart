@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
-import 'package:pendiente_frontend_flutter/screens/campaign_detail/campaign_detail_screen.dart';
+
 import 'package:pendiente_frontend_flutter/screens/campaigns/components/footer_card.dart';
 import 'package:pendiente_frontend_flutter/screens/campaigns/components/header_card.dart';
 import 'package:pendiente_frontend_flutter/screens/campaigns/components/image_card.dart';
+import 'package:pendiente_frontend_flutter/screens/campaign_detail/campaign_detail_screen.dart';
 
 class CampaignCard extends StatelessWidget {
   final Campaign campaignModel;

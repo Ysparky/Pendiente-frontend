@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:pendiente_frontend_flutter/model/donation_model.dart';
 
 class DonationCard extends StatelessWidget {

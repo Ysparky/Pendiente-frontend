@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in.dart';
+import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = '/splash';

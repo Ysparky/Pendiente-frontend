@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pendiente_frontend_flutter/screens/campaign_detail/campaign_detail_screen.dart';
-import 'package:pendiente_frontend_flutter/screens/card_info/register_card_screen.dart';
-import 'package:pendiente_frontend_flutter/screens/home/home_screen.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/sign_up.dart';
-import 'package:pendiente_frontend_flutter/screens/splash_screen.dart';
+
+import 'package:pendiente_frontend_flutter/screens/routes.dart';
 import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
+
+import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in_screen.dart';
+import 'package:pendiente_frontend_flutter/screens/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,14 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute:
           prefs.isLoggedIn ? HomeScreen.routeName : SignInScreen.routeName,
-      routes: {
-        SplashScreen.routeName: (context) => SplashScreen(),
-        SignInScreen.routeName: (context) => SignInScreen(),
-        SignUpScreen.routeName: (context) => SignUpScreen(),
-        HomeScreen.routeName: (context) => HomeScreen(),
-        CampaignDetailScreen.routeName: (context) => CampaignDetailScreen(),
-        RegisterCardScreeen.routeName: (context) => RegisterCardScreeen(),
-      },
+      routes: routes,
     );
   }
 }

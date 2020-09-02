@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pendiente_frontend_flutter/screens/campaigns/campaigns_screen.dart';
 import 'package:pendiente_frontend_flutter/screens/favorite_campaigns/donations_page.dart';
 import 'package:pendiente_frontend_flutter/screens/profile/profile_screen.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in.dart';
+import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in_screen.dart';
 import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,8 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         child: ListView(
           children: [
-            DrawerHeader(
-              child: FlutterLogo(),
+            UserAccountsDrawerHeader(
+              accountName: Text('User@gmail.com'),
+              accountEmail: Text('User@gmail.com'),
+              currentAccountPicture: FlutterLogo(),
             ),
             ListTile(
               leading: Icon(Icons.dashboard),
@@ -117,32 +119,3 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 }
-
-// class CampaignsList extends StatelessWidget {
-//   CampaignsList({
-//     Key key,
-//   }) : super(key: key);
-//   final campaignListProvider = new CampaignListProvider();
-//   @override
-//   Widget build(BuildContext context) {
-//     final Size size = MediaQuery.of(context).size;
-//     return FutureBuilder(
-//       future: campaignListProvider.makeRequest(),
-//       builder: (context, AsyncSnapshot<List> snapshot) {
-//         if (!snapshot.hasData) {
-//           return Center(
-//             child: CircularProgressIndicator(),
-//           );
-//         } else {
-//           return ListView.builder(
-//             physics: BouncingScrollPhysics(),
-//             padding: EdgeInsets.symmetric(vertical: size.width * 0.03),
-//             itemCount: snapshot.data.length,
-//             itemBuilder: (context, index) =>
-//                 CampaignCard(size: size, campaign: snapshot.data[index]),
-//           );
-//         }
-//       },
-//     );
-//   }
-// }

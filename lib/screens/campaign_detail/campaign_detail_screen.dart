@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
+
 import 'package:pendiente_frontend_flutter/screens/campaign_detail/components/footer_campaign_detail.dart';
 import 'package:pendiente_frontend_flutter/screens/campaign_detail/components/horizontal_prices_list.dart';
 

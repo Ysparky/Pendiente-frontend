@@ -1,6 +1,4 @@
-import 'package:pendiente_frontend_flutter/model/donor_model.dart';
-
-import 'baskets_model.dart';
+import 'package:pendiente_frontend_flutter/model/models.dart';
 
 class Campaigns {
   List<Campaign> campaignsList = new List();

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pendiente_frontend_flutter/model/donor_model.dart';
-import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
-import 'package:pendiente_frontend_flutter/screens/components/sign_button.dart';
-import 'package:pendiente_frontend_flutter/screens/sign_in/components/sign_text.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+
+import 'package:pendiente_frontend_flutter/model/donor_model.dart';
+import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
+
+import 'package:pendiente_frontend_flutter/screens/widgets/widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String routeName = '/sign_up';
@@ -14,7 +15,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   ProgressDialog progressDialog;
-  final registerDonorProvider = new CampaignListProvider();
+  final registerDonorProvider = new ApiProvider();
   String name, lastName, email, password;
   final underlineInputBorder = UnderlineInputBorder(
     borderSide: BorderSide(

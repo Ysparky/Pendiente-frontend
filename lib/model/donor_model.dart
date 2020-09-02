@@ -1,3 +1,5 @@
+import 'package:pendiente_frontend_flutter/model/donation_model.dart';
+
 class Donors {
   List<Donor> donorsList = new List();
   Donors.fromJsonList(List<dynamic> jsonList) {
@@ -24,8 +26,11 @@ class Donor {
   int securityCode;
   int userId;
   int personId;
+  int colaborationsQty;
+  int followersQty;
   String createdAt;
   String updatedAt;
+  Donation lastDonation;
 
   Donor({
     this.id,
@@ -41,8 +46,11 @@ class Donor {
     this.securityCode,
     this.userId,
     this.personId,
+    this.colaborationsQty,
+    this.followersQty,
     this.createdAt,
     this.updatedAt,
+    this.lastDonation,
   });
 
   factory Donor.fromJsonMap(Map<String, dynamic> json) => Donor(
@@ -57,6 +65,21 @@ class Donor {
         personId: json['personId'],
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
+      );
+
+  factory Donor.fromProfileJsonMap(Map<String, dynamic> json) => Donor(
+        id: json['id'],
+        name: json['name'],
+        lastName: json['lastName'],
+        pathImage: json['image'],
+        email: json['email'],
+        cardHolder: json['cardHolder'],
+        cardNumber: json['cardNumber'],
+        expirationYear: json['expirationYear'],
+        expirationMonth: json['expirationMonth'],
+        colaborationsQty: json['colaborationsQty'],
+        followersQty: json['followersQty'],
+        lastDonation: Donation.fromProfileMap(json['lastDonationData']),
       );
 
   factory Donor.loginInfo(Map<String, dynamic> json) => Donor(

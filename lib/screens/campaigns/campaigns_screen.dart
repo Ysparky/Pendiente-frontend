@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pendiente_frontend_flutter/provider/campaign_list_provider.dart';
+import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
 import 'package:pendiente_frontend_flutter/screens/campaigns/campaign_card.dart';
-import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 class CampaignsScreen extends StatelessWidget {
-  final campaignListProvider = new CampaignListProvider();
-  final prefs = new SharedPref();
+  final campaignListProvider = new ApiProvider();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return FutureBuilder(
-      future: campaignListProvider.makeRequest(prefs.donorId),
+      future: campaignListProvider.getCampaignsByDonorId(),
       builder: (context, snapshot) => _campaignsList(context, snapshot, size),
     );
   }
