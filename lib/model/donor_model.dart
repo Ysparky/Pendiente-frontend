@@ -98,4 +98,11 @@ class Donor {
     });
     return donorsList;
   }
+
+  Map toJson() => {
+        'id': id,
+        'name': name,
+        'lastName': lastName,
+        'email': email,
+      };
 }

@@ -27,7 +27,7 @@ class CampaignCard extends StatelessWidget {
         width: double.infinity,
         margin: EdgeInsets.symmetric(
           horizontal: size.width * 0.03,
-          vertical: size.height * 0.015,
+          vertical: size.height * 0.01,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),

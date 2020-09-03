@@ -17,7 +17,7 @@ class CampaignsScreen extends StatelessWidget {
       BuildContext context, AsyncSnapshot<List> snapshot, Size size) {
     return snapshot.hasData
         ? ListView.builder(
-            padding: EdgeInsets.symmetric(vertical: size.height * 0.02),
+            padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) => CampaignCard(
               campaignModel: snapshot.data[index],

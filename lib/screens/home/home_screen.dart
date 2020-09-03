@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
+
 import 'package:pendiente_frontend_flutter/screens/campaigns/campaigns_screen.dart';
 import 'package:pendiente_frontend_flutter/screens/favorite_campaigns/donations_page.dart';
 import 'package:pendiente_frontend_flutter/screens/profile/profile_screen.dart';
 import 'package:pendiente_frontend_flutter/screens/sign_in/sign_in_screen.dart';
-import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/home';
@@ -34,12 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: Drawer(
-        child: ListView(
+        child: Column(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('User@gmail.com'),
-              accountEmail: Text('User@gmail.com'),
-              currentAccountPicture: FlutterLogo(),
+              accountName: Text('${prefs.donorName}'),
+              accountEmail: Text(prefs.donorEmail),
+              currentAccountPicture: CircleAvatar(
+                  backgroundImage:
+                      prefs.donorImage.toString().contains('assets/images')
+                          ? AssetImage('assets/images/profile-placeholder.png')
+                          : NetworkImage(prefs.donorImage)),
             ),
             ListTile(
               leading: Icon(Icons.dashboard),
@@ -51,6 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context);
               },
             ),
+            Spacer(),
+            Divider(thickness: 1.0, height: 0),
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Salir'),

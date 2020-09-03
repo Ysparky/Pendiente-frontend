@@ -23,6 +23,31 @@ class SharedPref {
     _prefs.setInt('donorId', donorId);
   }
 
+  get donorImage {
+    return _prefs.getString('donorImage') ??
+        'assets/images/pendiente_logo_wbg-removebg.png';
+  }
+
+  set donorImage(String path) {
+    _prefs.setString('donorImage', path);
+  }
+
+  get donorName {
+    return _prefs.getString('donorName') ?? 'Name';
+  }
+
+  set donorName(String name) {
+    _prefs.setString('donorName', name);
+  }
+
+  get donorEmail {
+    return _prefs.getString('donorEmail') ?? 'help@gmail.com';
+  }
+
+  set donorEmail(String email) {
+    _prefs.setString('donorEmail', email);
+  }
+
   get basketId {
     return _prefs.getInt('basketId') ?? 0;
   }

@@ -121,6 +121,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Navigator.popAndPushNamed(
                                 context,
                                 HomeScreen.routeName,
+                                arguments: donor,
                               );
                             } else {
                               Scaffold.of(context).showSnackBar(SnackBar(

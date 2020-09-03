@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -7,7 +8,7 @@ import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences
 
 class ApiProvider {
   final _prefs = new SharedPref();
-  final String _url = 'pendiente-backend.herokuapp.com/api/';
+  final String _url = 'https://pendiente-backend.herokuapp.com/api/';
 
   Future<List<Campaign>> getCampaignsByDonorId() async {
     final response = await http.get(_url + 'campaigns/donor/${_prefs.donorId}');
@@ -84,6 +85,9 @@ class ApiProvider {
     final response = await http.get(_url + 'users/${_prefs.donorId}');
     final decodedBody = json.decode(response.body);
     final donor = new Donor.fromProfileJsonMap(decodedBody['data']);
+    if (donor.pathImage != null) _prefs.donorImage = donor.pathImage;
+    _prefs.donorName = '${donor.name} ${donor.lastName}';
+    _prefs.donorEmail = donor.email;
     return donor;
   }
 }
