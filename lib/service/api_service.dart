@@ -6,26 +6,28 @@ import 'package:http/http.dart' as http;
 import 'package:pendiente_frontend_flutter/model/models.dart';
 import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
-class ApiProvider {
+const BASE_URL = 'https://pendiente-backend.herokuapp.com/api';
+
+class ApiService {
   final _prefs = new SharedPref();
-  final String _url = 'https://pendiente-backend.herokuapp.com/api/';
 
   Future<List<Campaign>> getCampaignsByDonorId() async {
-    final response = await http.get(_url + 'campaigns/donor/${_prefs.donorId}');
+    final response =
+        await http.get('$BASE_URL/campaigns/donor/${_prefs.donorId}');
     final decodedBody = json.decode(response.body);
     Campaigns campaigns = new Campaigns.fromJsonList(decodedBody['data']);
     return campaigns.campaignsList;
   }
 
   Future<Campaign> getCampaignsDetail(int campaignId) async {
-    final response = await http.get(_url + 'campaigns/$campaignId');
+    final response = await http.get('$BASE_URL/campaigns/$campaignId');
     final decodedBody = json.decode(response.body);
     Campaign campaign = new Campaign.fromCampaignDetailMap(decodedBody['data']);
     return campaign;
   }
 
   Future<Donor> postLogin(String email, String password) async {
-    final response = await http.post(_url + 'authenticate/login', body: {
+    final response = await http.post('$BASE_URL/authenticate/login', body: {
       "email": email,
       "password": password,
     });
@@ -36,7 +38,7 @@ class ApiProvider {
   }
 
   Future<Donor> postRegister(Donor donor) async {
-    final response = await http.post(_url + 'users', body: {
+    final response = await http.post('$BASE_URL/users', body: {
       "name": donor.name,
       "lastName": donor.lastName,
       "email": donor.email,
@@ -49,7 +51,7 @@ class ApiProvider {
   }
 
   Future<bool> postMakeDonation(Campaign campaign) async {
-    final response = await http.post(_url + 'donations/', body: {
+    final response = await http.post('$BASE_URL/donations/', body: {
       "email": "leo@urp.com",
       "card_number": "4111111111111111",
       "cvv": "123",
@@ -65,7 +67,8 @@ class ApiProvider {
   }
 
   Future<List<Donation>> getDonationsById() async {
-    final response = await http.get(_url + 'donations/donor/${_prefs.donorId}');
+    final response =
+        await http.get('$BASE_URL/donations/donor/${_prefs.donorId}');
     final decodedBody = json.decode(response.body);
     Donations donations = new Donations.fromJsonList(decodedBody['data']);
     donations.donationsList.sort((a, b) =>
@@ -74,7 +77,7 @@ class ApiProvider {
   }
 
   Future<bool> putLike(int campaignId) async {
-    final response = await http.put(_url + 'likes/', body: {
+    final response = await http.put('$BASE_URL/likes/', body: {
       "donorId": "${_prefs.donorId}",
       "campaignId": "$campaignId",
     });
@@ -82,7 +85,7 @@ class ApiProvider {
   }
 
   Future<Donor> getDonorProfile() async {
-    final response = await http.get(_url + 'users/${_prefs.donorId}');
+    final response = await http.get('$BASE_URL/users/${_prefs.donorId}');
     final decodedBody = json.decode(response.body);
     final donor = new Donor.fromProfileJsonMap(decodedBody['data']);
     if (donor.pathImage != null) _prefs.donorImage = donor.pathImage;
