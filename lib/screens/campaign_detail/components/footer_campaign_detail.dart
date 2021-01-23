@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pendiente_frontend_flutter/service/api_service.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
-import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
 import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 import 'package:pendiente_frontend_flutter/screens/widgets/sign_button.dart';
@@ -17,7 +17,7 @@ class FooterCampaignDetail extends StatelessWidget {
 
   final Size size;
   final Campaign campaignModel;
-  final donationProvider = new ApiProvider();
+  final donationProvider = new ApiService();
   @override
   Widget build(BuildContext context) {
     ProgressDialog progressDialog =

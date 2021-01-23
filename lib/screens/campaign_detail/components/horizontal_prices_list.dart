@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:pendiente_frontend_flutter/model/models.dart';
-import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
+import 'package:pendiente_frontend_flutter/service/api_service.dart';
+// import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
 import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 class HorizontalPricesList extends StatefulWidget {
@@ -19,7 +20,7 @@ class HorizontalPricesList extends StatefulWidget {
 }
 
 class _HorizontalPricesListState extends State<HorizontalPricesList> {
-  final detailCampaignProvider = new ApiProvider();
+  final detailCampaignProvider = new ApiService();
   final prefs = new SharedPref();
   Basket _current = Basket();
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:pendiente_frontend_flutter/model/donor_model.dart';
-import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
 
 import 'package:pendiente_frontend_flutter/screens/favorite_campaigns/donation_card.dart';
+import 'package:pendiente_frontend_flutter/service/api_service.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final donorProvider = new ApiProvider();
+  final donorProvider = new ApiService();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;

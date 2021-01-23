@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pendiente_frontend_flutter/service/api_service.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
-import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
 import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
 import 'package:pendiente_frontend_flutter/screens/screens.dart';
@@ -16,7 +16,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   ProgressDialog progressDialog;
-  final loginProvider = new ApiProvider();
+  final loginProvider = new ApiService();
   final underlineInputBorder = UnderlineInputBorder(
     borderSide: BorderSide(
       color: Color(0xffEFC426),

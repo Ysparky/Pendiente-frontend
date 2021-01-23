@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:pendiente_frontend_flutter/model/models.dart';
 import 'package:pendiente_frontend_flutter/shared-preferences/shared_preferences.dart';
 
-const BASE_URL = 'https://pendiente-backend.herokuapp.com/api';
+// const BASE_URL = 'https://pendiente-backend.herokuapp.com/api';
+const BASE_URL = 'http://192.168.0.109:5001/api';
 
 class ApiService {
   final _prefs = new SharedPref();

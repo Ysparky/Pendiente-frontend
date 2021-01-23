@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:pendiente_frontend_flutter/model/campaign_model.dart';
-import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
 
 import 'package:pendiente_frontend_flutter/screens/campaigns/components/social_interaction_button.dart';
+import 'package:pendiente_frontend_flutter/service/api_service.dart';
 
 class FooterCard extends StatefulWidget {
   const FooterCard({
@@ -18,7 +18,7 @@ class FooterCard extends StatefulWidget {
 }
 
 class _FooterCardState extends State<FooterCard> {
-  final campaignProvider = new ApiProvider();
+  final campaignProvider = new ApiService();
   bool isLiked;
   int likesCount;
   @override

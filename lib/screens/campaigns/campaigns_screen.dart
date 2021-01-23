@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pendiente_frontend_flutter/provider/api_provider.dart';
 import 'package:pendiente_frontend_flutter/screens/campaigns/campaign_card.dart';
+import 'package:pendiente_frontend_flutter/service/api_service.dart';
 
 class CampaignsScreen extends StatelessWidget {
-  final campaignListProvider = new ApiProvider();
+  final campaignListProvider = new ApiService();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
